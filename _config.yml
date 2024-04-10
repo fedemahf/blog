@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: blog
-baseurl: "blog" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 author: "Federico Mahfoud"
 url: "https://federico.mahfoud.ar" # the base hostname & protocol for your site, e.g. http://example.com
 
