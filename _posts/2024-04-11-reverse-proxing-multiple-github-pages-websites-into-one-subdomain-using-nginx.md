@@ -81,6 +81,6 @@ First, secure your SSH server in your VPS:
 
 Useful tutorial: [How to Set Up SSH Keys on Debian 11](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-debian-11) by *Jamon Camisso*
 
-In my case, I'm using CloudFlare to proxy all the requests and hide the real location of my nginx server. If all the requests to my nginx server are coming from CloudFlare, then I only need to listen to CloudFlare IPs. I used the [Allow CloudFlare only](https://gist.github.com/Manouchehri/cdd4e56db6596e7c3c5a) script by *Manouchehri* to drop all the connections that don't come from CloudFlare in the ports 80 and 443.
+In my case, I'm using CloudFlare to proxy all the requests and hide the real location of my nginx server. If all the requests to my nginx server are coming from CloudFlare, then I only need to listen to CloudFlare IPs. I used the [Allow CloudFlare only](https://gist.github.com/Manouchehri/cdd4e56db6596e7c3c5a) script by *Manouchehri* to drop all the connections in ports 80,443 that don't come from CloudFlare.
 
 Also, I used the [`cloudflare-sync-ips.sh` script](https://github.com/ergin/nginx-cloudflare-real-ip) by *ergin* to see the real user IPs in the nginx access log.
