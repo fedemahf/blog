@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Reverse-proxing multiple GitHub Pages websites into one subdomain using Nginx
+title: Reverse-proxing multiple GitHub Pages websites into one subdomain using NGINX
+description: Using NGINX to reverse-proxy multiple static websites from GitHub Pages to a single subdomain
 date: 2024-04-11 01:01:01 -0300
 author: Federico Mahfoud
 ---
@@ -14,7 +15,7 @@ GitHub provides good hosting for static websites. I'm using it for:
 
 But that's not enough for me. I want all my static websites to live under my domain, [federico.mahfoud.ar](https://federico.mahfoud.ar).
 
-I decided it was about time to dive into nginx. I searched for a "getting started" kind of video and found [NGINX Tutorial for Beginners](https://www.youtube.com/watch?v=9t9Mp0BGnyI) by *freeCodeCamp*. This video opened my eyes and made me understand that the `proxy_pass` directive was what I needed.
+I decided it was about time to dive into NGINX. I searched for a "getting started" kind of video and found [NGINX Tutorial for Beginners](https://www.youtube.com/watch?v=9t9Mp0BGnyI) by *freeCodeCamp*. This video opened my eyes and made me understand that the `proxy_pass` directive was what I needed.
 
 ## Prerequisites
 
@@ -25,7 +26,7 @@ I decided it was about time to dive into nginx. I searched for a "getting starte
 
 ## Implementation
 
-After connecting via SSH to my VPS, switching to root and installing Nginx, I created a new configuration file in `/etc/nginx/sites-enabled` named `federico.mahfoud.ar` with the following configuration:
+After connecting via SSH to my VPS, switching to root and installing NGINX, I created a new configuration file in `/etc/nginx/sites-enabled` named `federico.mahfoud.ar` with the following configuration:
 
 ```nginx
 server {
@@ -62,7 +63,7 @@ After creating this file, the configuration can be tested using:
 nginx -t
 ```
 
-If everything is fine, you should be able to reload the nginx configuration.
+If everything is fine, you should be able to reload the NGINX configuration.
 
 ```sh
 nginx -s reload
@@ -81,6 +82,6 @@ First, secure your SSH server in your VPS:
 
 Useful tutorial: [How to Set Up SSH Keys on Debian 11](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-debian-11) by *Jamon Camisso*
 
-In my case, I'm using CloudFlare to proxy all the requests and hide the real location of my nginx server. If all the requests to my nginx server are coming from CloudFlare, then I only need to listen to CloudFlare IPs. I used the [Allow CloudFlare only](https://gist.github.com/Manouchehri/cdd4e56db6596e7c3c5a) script by *Manouchehri* to drop all the connections in ports 80,443 that don't come from CloudFlare.
+In my case, I'm using CloudFlare to proxy all the requests and hide the real location of my NGINX server. If all the requests to my NGINX server are coming from CloudFlare, then I only need to listen to CloudFlare IPs. I used the [Allow CloudFlare only](https://gist.github.com/Manouchehri/cdd4e56db6596e7c3c5a) script by *Manouchehri* to drop all the connections in ports 80,443 that don't come from CloudFlare.
 
-Also, I used the [`cloudflare-sync-ips.sh` script](https://github.com/ergin/nginx-cloudflare-real-ip) by *ergin* to see the real user IPs in the nginx access log.
+Also, I used the [`cloudflare-sync-ips.sh` script](https://github.com/ergin/nginx-cloudflare-real-ip) by *ergin* to see the real user IPs in the NGINX access log.
