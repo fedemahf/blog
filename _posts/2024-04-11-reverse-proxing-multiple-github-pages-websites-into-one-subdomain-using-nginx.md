@@ -73,15 +73,18 @@ At this point, your reverse proxy should be working. You need to point your doma
 
 ## Post installation (optional)
 
+### SSH security
 I recommend taking some steps more for security.
 
-First, secure your SSH server in your VPS:
+Secure your SSH server in your VPS:
 - create a personal SSH key and use it to log into your user
 - disable SSH password authentication (`PasswordAuthentication no`) and root login (`PermitRootLogin no`)
 - install and configure fail2ban for the ssh daemon
 
 Useful tutorial: [How to Set Up SSH Keys on Debian 11](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-debian-11) by *Jamon Camisso*
 
-In my case, I'm using CloudFlare to proxy all the requests and hide the real location of my NGINX server. If all the requests to my NGINX server are coming from CloudFlare, then I only need to listen to CloudFlare IPs. I used the [Allow CloudFlare only](https://gist.github.com/Manouchehri/cdd4e56db6596e7c3c5a) script by *Manouchehri* to drop all the connections in ports 80,443 that don't come from CloudFlare.
+### CloudFlare security
+
+In my case, I'm using CloudFlare to proxy all the requests and hide the real location of my NGINX server. If all the requests to my NGINX server are coming from CloudFlare, then I only need to listen to CloudFlare IPs. I used the [Allow CloudFlare only](https://gist.github.com/Manouchehri/cdd4e56db6596e7c3c5a) script by *Manouchehri* to drop all connections on ports 80,443 that aren't coming from CloudFlare.
 
 Also, I used the [`cloudflare-sync-ips.sh` script](https://github.com/ergin/nginx-cloudflare-real-ip) by *ergin* to see the real user IPs in the NGINX access log.
